@@ -19,14 +19,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
         checkbox.addEventListener('change', function() {
             const allChecked = Array.from(itemCheckboxes).every(checkbox => checkbox.checked);
             selectAllCheckbox.checked = allChecked;
-            updateByCheckedBox(checkbox.dataset.id);
+            updateByCheckedBox(checkbox.dataset.id, checkbox.checked);
         });
     });
 });
 
-function updateByCheckedBox(commodityId) {
-    fetch(`ShopCartController?commodityId=${commodityId}&serviceType=updateByCheckedBox`)
-        .then(response => response.text())
+function updateByCheckedBox(commodityId, isChecked) {
+    fetch(`ShopCartController?commodityId=${commodityId}&serviceType=updateByCheckedBox&isChecked=${isChecked}`)
+        .then(response => response.json())
         .then(data => {
             console.log(data);
             // 可以根据需要更新页面或进行其他操作
@@ -35,8 +35,8 @@ function updateByCheckedBox(commodityId) {
 }
 
 function updateAllCheckedBox(isChecked) {
-    fetch(`ShopCartController?serviceType=updateAllCheckedBox&commodityId=${isChecked}`)
-        .then(response => response.text())
+    fetch(`ShopCartController?serviceType=updateAllCheckedBox&isChecked=${isChecked}`)
+        .then(response => response.json())
         .then(data => {
             console.log(data);
             // 可以根据需要更新页面或进行其他操作

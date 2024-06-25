@@ -8,17 +8,17 @@ import zx.bean.MyShopCartItemData;
 import zx.dao.CommodityDao;
 
 public class ShopCartService {
-   public static void dispathServiceType(String serviceType, String commodityId, MyShopCartDate myShopCartDate){  // what is serviceType?
+   public static void dispathServiceType(String serviceType, String commodityId, String isChecked, MyShopCartDate myShopCartDate) {
       switch (serviceType){
          case "addToCart":
             addToCart(commodityId, myShopCartDate);
             break;
          case "updateByCheckedBox":
-            updateByCheckedBox(commodityId, myShopCartDate);
+            updateByCheckedBox(commodityId, isChecked, myShopCartDate);
             break;
          case "updateAllCheckedBox":
-            boolean isChecked = Boolean.parseBoolean(commodityId); // 将 commodityId 解释为全选状态
-            updateAllCheckedBox(myShopCartDate, isChecked);
+            boolean allChecked = Boolean.parseBoolean(isChecked); // 将 isChecked 解释为全选状态
+            updateAllCheckedBox(myShopCartDate, allChecked);
          break;
          case "remove":
             remove(commodityId, myShopCartDate);
@@ -34,8 +34,9 @@ public class ShopCartService {
       }
    }
 
-   private static void updateByCheckedBox(String commodityId, MyShopCartDate myShopCartDate) {
-      myShopCartDate.updateByCheckedBox(commodityId);
+   private static void updateByCheckedBox(String commodityId, String isChecked, MyShopCartDate myShopCartDate) {
+      boolean checked = Boolean.parseBoolean(isChecked);
+      myShopCartDate.updateByCheckedBox(commodityId, checked);
    }
 
    public static void updateAllCheckedBox(MyShopCartDate myShopCartDate, boolean isChecked) {

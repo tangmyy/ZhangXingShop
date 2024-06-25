@@ -52,15 +52,16 @@ public class MyShopCartDate {
    }
 
    // 单选盒子
-   public void updateByCheckedBox(String commodityID) {
+   public void updateByCheckedBox(String commodityID, boolean isChecked) {
       MyShopCartItemData myShopCartItemData = cartList.get(commodityID);
-      myShopCartItemData.setChecked(!myShopCartItemData.getChecked());
-      if(myShopCartItemData.getChecked()) {
-         setTotal(total.add(myShopCartItemData.getSubtotal()) );
-      }else {
-         setTotal(total.subtract(myShopCartItemData.getSubtotal()) );
+      myShopCartItemData.setChecked(isChecked);
+      if(isChecked) {
+         setTotal(total.add(myShopCartItemData.getSubtotal()));
+      } else {
+         setTotal(total.subtract(myShopCartItemData.getSubtotal()));
       }
    }
+
    // 全选盒子
    public void updateAllCheckedBox(boolean isChecked) {
       allChecked = isChecked;

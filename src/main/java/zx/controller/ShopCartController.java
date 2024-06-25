@@ -16,6 +16,7 @@ public class ShopCartController extends HttpServlet {
       String commodityId = request.getParameter("commodityId");
       String serviceType = request.getParameter("serviceType");
       String changeNum = request.getParameter("changeNum");
+      String isChecked = request.getParameter("isChecked"); // 新增
       MyShopCartDate myShopCartDate = (MyShopCartDate) request.getSession().getAttribute("myShopCartDate");    // 强制转换
 
 
@@ -30,7 +31,7 @@ public class ShopCartController extends HttpServlet {
 
       boolean success = false;
 
-      if (commodityId != null) {
+      if (commodityId != null || isChecked != null) {
          if ("updateByNum".equals(serviceType) && changeNum != null) {
             try {
                int changeNumber = Integer.parseInt(changeNum);
@@ -40,7 +41,7 @@ public class ShopCartController extends HttpServlet {
                e.printStackTrace();
             }
          } else {
-            ShopCartService.dispathServiceType(serviceType, commodityId, myShopCartDate);
+            ShopCartService.dispathServiceType(serviceType, commodityId, isChecked, myShopCartDate);
             success = true;
          }
       }
