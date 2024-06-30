@@ -17,7 +17,7 @@ import javax.servlet.annotation.WebServlet;
 public class RegisterController extends HttpServlet {
    @Override
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      // 1»ñÈ¡¿Í»§¶ËÊı¾İ
+      // 1è·å–å®¢æˆ·ç«¯æ•°æ®
       String rs_username = request.getParameter("rs_username");
       String rs_userpwd = request.getParameter("rs_userpwd");
       String rs_qruserpwd = request.getParameter("rs_qruserpwd");
@@ -31,25 +31,25 @@ public class RegisterController extends HttpServlet {
       System.out.println("rs_email = " + rs_email);
       System.out.println("rs_sex = " + rs_sex);
 
-      // ÓÊÏäµÄÕıÔò±í´ïÊ½Ğ£Ñé
+      // é‚®ç®±çš„æ­£åˆ™è¡¨è¾¾å¼æ ¡éªŒ
       String TestEmail = "^[A-Za-z0-9+_.-]+@(.+)$";
       Pattern pattern = Pattern.compile(TestEmail);
       Matcher matcher = pattern.matcher(rs_email);
       if (!matcher.matches()) {
-         request.setAttribute("emailCheck", "ÓÊÏä¸ñÊ½²»ÕıÈ·£¡");
+         request.setAttribute("emailCheck", "é‚®ç®±æ ¼å¼ä¸æ­£ç¡®ï¼");
          request.getRequestDispatcher("register.jsp").forward(request, response);
          return;
       }
 
-      // ÃÜÂëµÄĞ£Ñé
+      // å¯†ç çš„æ ¡éªŒ
       if(!rs_userpwd.equals(rs_qruserpwd)){
-         request.setAttribute("passwordCheck", "Á½´ÎÊäÈëÃÜÂë²»Ò»ÖÂ£¡");
+         request.setAttribute("passwordCheck", "ä¸¤æ¬¡è¾“å…¥å¯†ç ä¸ä¸€è‡´ï¼");
          request.getRequestDispatcher("register.jsp").forward(request, response);
          return;
       }
 
 
-      // 2·â×°Êı¾İ,µ÷ÓÃÒµÎñÂß¼­²ãÀ´´¦ÀíÊı¾İ
+      // 2å°è£…æ•°æ®,è°ƒç”¨ä¸šåŠ¡é€»è¾‘å±‚æ¥å¤„ç†æ•°æ®
       Users user = new Users();
       user.setName(rs_username);
       String pwdmd5 = MD5Util.getMD5Str(rs_userpwd);
@@ -58,13 +58,13 @@ public class RegisterController extends HttpServlet {
       user.setEmail(rs_email);
       user.setSex(rs_sex);
 
-      // 3¸ù¾İÒµÎñÂß¼­²ãµÄ·µ»Ø½á¹û×ö³ö²»Í¬µÄÏìÓ¦
+      // 3æ ¹æ®ä¸šåŠ¡é€»è¾‘å±‚çš„è¿”å›ç»“æœåšå‡ºä¸åŒçš„å“åº”
       response.setContentType("text/html;charset=utf-8");
       if(!UserService.Register(user)){
-         response.getWriter().write("¸ÃÓÃ»§ÒÑ´æÔÚ£¬ÇëÕÒ»ØÃÜÂë£¡");
+         response.getWriter().write("è¯¥ç”¨æˆ·å·²å­˜åœ¨ï¼Œè¯·æ‰¾å›å¯†ç ï¼");
          response.setHeader("refresh", "3;register.jsp");
       } else {
-         response.getWriter().write("×¢²á³É¹¦£¡ 3sºóÌø×ªµ½µÇÂ¼Ò³Ãæ...");
+         response.getWriter().write("æ³¨å†ŒæˆåŠŸï¼ 3såè·³è½¬åˆ°ç™»å½•é¡µé¢...");
          response.setHeader("refresh", "3;login.jsp");
       }
 

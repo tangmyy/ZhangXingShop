@@ -1,8 +1,8 @@
-<%@ page contentType="text/html; charset=GBK" pageEncoding="GBK" language="java"%>
+<%@ page contentType="text/html; charset=GBK" pageEncoding="UTF-8" language="java"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="GBK">
+  <meta charset="UTF-8">
   <title>index</title>
   <link rel="stylesheet" href="css/index.css"/>
 </head>

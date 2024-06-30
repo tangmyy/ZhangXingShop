@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const selectAllCheckbox = document.getElementById('select-all');
     const itemCheckboxes = document.querySelectorAll('.item-checkbox');
 
-    // ¼àÌıÈ«Ñ¡¿òµÄ±ä»¯
+    // ç›‘å¬å…¨é€‰æ¡†çš„å˜åŒ–
     selectAllCheckbox.addEventListener('change', function() {
         const isChecked = selectAllCheckbox.checked;
         itemCheckboxes.forEach(checkbox => {
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         updateAllCheckedBox(isChecked);
     });
 
-    // ¼àÌıÃ¿¸öµ¥Ñ¡¿òµÄ±ä»¯
+    // ç›‘å¬æ¯ä¸ªå•é€‰æ¡†çš„å˜åŒ–
     itemCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('change', function() {
             const allChecked = Array.from(itemCheckboxes).every(checkbox => checkbox.checked);
@@ -29,7 +29,7 @@ function updateByCheckedBox(commodityId, isChecked) {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            // ¿ÉÒÔ¸ù¾İĞèÒª¸üĞÂÒ³Ãæ»ò½øĞĞÆäËû²Ù×÷
+            // å¯ä»¥æ ¹æ®éœ€è¦æ›´æ–°é¡µé¢æˆ–è¿›è¡Œå…¶ä»–æ“ä½œ
         })
         .catch(error => console.error('Error:', error));
 }
@@ -39,7 +39,7 @@ function updateAllCheckedBox(isChecked) {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            // ¿ÉÒÔ¸ù¾İĞèÒª¸üĞÂÒ³Ãæ»ò½øĞĞÆäËû²Ù×÷
+            // å¯ä»¥æ ¹æ®éœ€è¦æ›´æ–°é¡µé¢æˆ–è¿›è¡Œå…¶ä»–æ“ä½œ
         })
         .catch(error => console.error('Error:', error));
 }
@@ -53,10 +53,10 @@ function addToCart(commodityId) {
             if (data.loggedIn === false) {
                 window.location.href = "login.jsp";
             } else if (data.success) {
-                // ¼ÓÈë¹ºÎï³µ³É¹¦ºóÌø×ªµ½¹ºÎï³µÒ³Ãæ
+                // åŠ å…¥è´­ç‰©è½¦æˆåŠŸåè·³è½¬åˆ°è´­ç‰©è½¦é¡µé¢
                 window.location.href = "myshopcart.jsp";
             } else {
-                alert("¼ÓÈë¹ºÎï³µÊ§°Ü£¬ÇëÉÔºóÔÙÊÔ£¡");
+                alert("åŠ å…¥è´­ç‰©è½¦å¤±è´¥ï¼Œè¯·ç¨åå†è¯•ï¼");
             }
         })
         .catch(error => console.error('Error:', error));
@@ -75,27 +75,27 @@ function remove(commodityId) {
                 itemElement.remove();
                 document.querySelector('.total-price').textContent = data.total;
                 if (data.cartEmpty) {
-                    document.querySelector('main').innerHTML = '<h1>¹ºÎï³µ¿Õ¿ÕÈçÒ²£¬¸Ï¿ìÈ¥¹ºÎï£¡</h1>';
+                    document.querySelector('main').innerHTML = '<h1>è´­ç‰©è½¦ç©ºç©ºå¦‚ä¹Ÿï¼Œèµ¶å¿«å»è´­ç‰©ï¼</h1>';
                 }
             } else {
-                alert("ÒÆ³ıÊ§°Ü£¬ÇëÉÔºóÔÙÊÔ£¡");
+                alert("ç§»é™¤å¤±è´¥ï¼Œè¯·ç¨åå†è¯•ï¼");
             }
         })
         .catch(error => console.error('Error:', error));
 }
 
 function updateByNum(commodityId, changeNum) {
-    // »ñÈ¡µ±Ç°ÉÌÆ·ÊıÁ¿
+    // è·å–å½“å‰å•†å“æ•°é‡
     var itemElement = document.querySelector(`.item[data-id="${commodityId}"]`);
     var Num = parseInt(itemElement.getAttribute('data-num'), 10);
 
-    // µ±ÊıÁ¿Îª1²¢ÇÒÓÃ»§µã»÷¼õºÅÊ±£¬µ¯³öÌáÊ¾¿ò
+    // å½“æ•°é‡ä¸º1å¹¶ä¸”ç”¨æˆ·ç‚¹å‡»å‡å·æ—¶ï¼Œå¼¹å‡ºæç¤ºæ¡†
     if (Num === 1 && changeNum === -1) {
-        alert("×¢Òâ£º±¦±´µÄÊıÁ¿²»ÄÜÔÙ¼õÉÙ¿©£¡");
+        alert("æ³¨æ„ï¼šå®è´çš„æ•°é‡ä¸èƒ½å†å‡å°‘å’¯ï¼");
         return;
     }
 
-    // ·¢ËÍAjaxÇëÇó
+    // å‘é€Ajaxè¯·æ±‚
     fetch(`ShopCartController?commodityId=${commodityId}&serviceType=updateByNum&changeNum=${changeNum}`, {
         method: 'GET'
     })
@@ -109,7 +109,7 @@ function updateByNum(commodityId, changeNum) {
                 itemElement.querySelector('.num-display').textContent = newNum;
                 document.querySelector('.total-price').textContent = data.total;
             } else {
-                alert("¸üĞÂÊıÁ¿Ê§°Ü£¬ÇëÉÔºóÔÙÊÔ£¡");
+                alert("æ›´æ–°æ•°é‡å¤±è´¥ï¼Œè¯·ç¨åå†è¯•ï¼");
             }
         })
         .catch(error => console.error('Error:', error));
@@ -125,13 +125,13 @@ function updateByNum(commodityId, changeNum) {
 //     location.href = "ShopCartController?commodityId=" +commodityId +"&serviceType=remove"
 // }
 // function updateByNum(commodityId, changeNum){
-//     // ÏÈÈ¡µ½¾ßÓĞÄ³ÊôĞÔÖµµÄ ÔªËØ £¨ÔÚJavaScriptÖĞ£¬¿ÉÒÔÊ¹ÓÃ dataset ÊôĞÔÀ´·ÃÎÊ×Ô¶¨ÒåÊı¾İÊôĞÔ£©
+//     // å…ˆå–åˆ°å…·æœ‰æŸå±æ€§å€¼çš„ å…ƒç´  ï¼ˆåœ¨JavaScriptä¸­ï¼Œå¯ä»¥ä½¿ç”¨ dataset å±æ€§æ¥è®¿é—®è‡ªå®šä¹‰æ•°æ®å±æ€§ï¼‰
 //     var input = document.querySelector(`input[data-id="${commodityId}"]`);
-//     // ÔÙÈ¡¸ÃÔªËØµÄÊôĞÔÖµ
+//     // å†å–è¯¥å…ƒç´ çš„å±æ€§å€¼
 //     var Num = parseInt(input.getAttribute('data-num'), 10);
-//     // µ±ÊıÁ¿Îª1²¢ÇÒÓÃ»§µã»÷¼õºÅÊ±£¬µ¯³öÌáÊ¾¿ò
+//     // å½“æ•°é‡ä¸º1å¹¶ä¸”ç”¨æˆ·ç‚¹å‡»å‡å·æ—¶ï¼Œå¼¹å‡ºæç¤ºæ¡†
 //     if (Num === 1 && changeNum === -1) {
-//         alert("×¢Òâ£º±¦±´µÄÊıÁ¿²»ÄÜÔÚ¼õÉÙ¿©£¡");
+//         alert("æ³¨æ„ï¼šå®è´çš„æ•°é‡ä¸èƒ½åœ¨å‡å°‘å’¯ï¼");
 //         return;
 //     }
 //     location.href = "ShopCartController?commodityId=" + commodityId + "&serviceType=updateByNum&changeNum=" + changeNum;

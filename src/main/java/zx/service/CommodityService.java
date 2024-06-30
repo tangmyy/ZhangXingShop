@@ -14,11 +14,11 @@ public class CommodityService {
       if(homeData.getKeyword() == null){
          CommodityDao.selectForHomeBySort(homeData);
       }else {
-         // ¹Ø¼ü×Ö²éÑ¯
+         // å…³é”®å­—æŸ¥è¯¢
          String keyword = homeData.getKeyword();
          CommodityDao.selectForHomeByKeyword(homeData,keyword);
       }
-      // ÉèÖÃµ¼º½À¸Ò³Âë
+      // è®¾ç½®å¯¼èˆªæ é¡µç 
       homeData.setFirstPageForNavigation();
       homeData.setLastPageForNavigation();
 

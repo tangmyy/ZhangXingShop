@@ -3,7 +3,7 @@ function passwordCheck() {
     var Ret_qruserpwd = document.getElementById("Ret_qruserpwd").value;
 
     if (Ret_userpwd !== Ret_qruserpwd) {
-        alert("Çë¼ì²é£¡Á½´ÎÊäÈëµÄÃÜÂë²»Ò»ÖÂ!");
+        alert("è¯·æ£€æŸ¥ï¼ä¸¤æ¬¡è¾“å…¥çš„å¯†ç ä¸ä¸€è‡´!");
         return false;
     }
 

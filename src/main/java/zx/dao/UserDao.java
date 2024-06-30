@@ -21,20 +21,20 @@ public class UserDao {
 			ps.setString(1, user.getName());   // 1 = wei zhi
 			ps.setString(2, user.getPwd());   // 1 = wei zhi
 
-			rs = ps.executeQuery();    // ²éÑ¯²Ù×÷½á¹ûÔÚrs¶ÔÏó
+			rs = ps.executeQuery();    // æŸ¥è¯¢æ“ä½œç»“æœåœ¨rså¯¹è±¡
 			while (rs.next()) {
-				int id = rs.getInt(1);   // Èç¹ûidµÄÖµ´óÓÚ 0 ËµÃ÷µÇÂ¼ĞÅÏ¢ÕıÈ·
+				int id = rs.getInt(1);   // å¦‚æœidçš„å€¼å¤§äº 0 è¯´æ˜ç™»å½•ä¿¡æ¯æ­£ç¡®
 				String tel = rs.getString("tel");
 				String username = rs.getString(3);
 				String pwd = rs.getString(4);
 				String email = rs.getString(5);
 				String sex = rs.getString(6);
 
-				LocalDateTime createTimeValue = rs.getTimestamp("create_time").toLocalDateTime();				//È¡³öÊ±¼ä
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-DD HH:MM:SS");				//ÉèÖÃÈÕÆÚÏÔÊ¾¸ñÊ½
-//				String createTime = createTimeValue.format(formatter);				//°ÑÈ¡³öµÄÊ±¼ä×ª»»³ÉĞèÒªµÄÊ±¼ä¸ñÊ½×Ö·û´®
+				LocalDateTime createTimeValue = rs.getTimestamp("create_time").toLocalDateTime();				//å–å‡ºæ—¶é—´
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-DD HH:MM:SS");				//è®¾ç½®æ—¥æœŸæ˜¾ç¤ºæ ¼å¼
+//				String createTime = createTimeValue.format(formatter);				//æŠŠå–å‡ºçš„æ—¶é—´è½¬æ¢æˆéœ€è¦çš„æ—¶é—´æ ¼å¼å­—ç¬¦ä¸²
 
-				//·â×°Êı¾İ
+				//å°è£…æ•°æ®
 				user.setId(id);
 				user.setTel(tel);
 //	    	    user.setName(userName);
@@ -44,8 +44,8 @@ public class UserDao {
 
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();   // ²»ÒªÉ¾£¬³öÁËÎÊÌâĞèÒªÔÚ¿ØÖÆÌ¨ÕÒ³öÔ­Òò
-			user.setId(-1);         // ³öÏÖÒì³££¨²»Ò»¶¨ÊÇÊı¾İ¿â£©
+			e.printStackTrace();   // ä¸è¦åˆ ï¼Œå‡ºäº†é—®é¢˜éœ€è¦åœ¨æ§åˆ¶å°æ‰¾å‡ºåŸå› 
+			user.setId(-1);         // å‡ºç°å¼‚å¸¸ï¼ˆä¸ä¸€å®šæ˜¯æ•°æ®åº“ï¼‰
 		} finally {
 			DBUtil.closeDBResource(rs, ps, conn);
 		}
@@ -62,11 +62,11 @@ public class UserDao {
 			System.out.print(sql + "\n");
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, user.getName());
-			rs = ps.executeQuery();    // ²éÑ¯²Ù×÷½á¹ûÔÚrs¶ÔÏó
-			return rs.next();  // Èç¹û½á¹û¼¯ÖĞÓĞÊı¾İ£¬·µ»Ø true£¬·ñÔò·µ»Ø false
+			rs = ps.executeQuery();    // æŸ¥è¯¢æ“ä½œç»“æœåœ¨rså¯¹è±¡
+			return rs.next();  // å¦‚æœç»“æœé›†ä¸­æœ‰æ•°æ®ï¼Œè¿”å› trueï¼Œå¦åˆ™è¿”å› false
 		} catch (SQLException e) {
-			e.printStackTrace();   // ²»ÒªÉ¾£¬³öÁËÎÊÌâĞèÒªÔÚ¿ØÖÆÌ¨ÕÒ³öÔ­Òò
-			return false;  // ³öÏÖÒì³£Ê±£¬·µ»Ø false
+			e.printStackTrace();   // ä¸è¦åˆ ï¼Œå‡ºäº†é—®é¢˜éœ€è¦åœ¨æ§åˆ¶å°æ‰¾å‡ºåŸå› 
+			return false;  // å‡ºç°å¼‚å¸¸æ—¶ï¼Œè¿”å› false
 		} finally {
 			DBUtil.closeDBResource(rs, ps, conn);
 		}
@@ -74,42 +74,42 @@ public class UserDao {
 	}
 
 	public static boolean InsertUser(Users user) {
-		Connection conn = DBUtil.getConn();  // »ñÈ¡Êı¾İ¿âÁ¬½Ó
-//		String sql = "INSERT INTO users (name, pwd, tel, email, sex, create_time) VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";  // SQL ²åÈëÓï¾ä
-		String sql = "insert into users(name,pwd,tel,email,sex,create_time) values(?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";  // SQL ²åÈëÓï¾ä
+		Connection conn = DBUtil.getConn();  // è·å–æ•°æ®åº“è¿æ¥
+//		String sql = "INSERT INTO users (name, pwd, tel, email, sex, create_time) VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";  // SQL æ’å…¥è¯­å¥
+		String sql = "insert into users(name,pwd,tel,email,sex,create_time) values(?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";  // SQL æ’å…¥è¯­å¥
 		PreparedStatement ps = null;
 		try {
-			ps = conn.prepareStatement(sql);  // Ô¤±àÒë SQL Óï¾ä
-			ps.setString(1, user.getName());  // ÉèÖÃ SQL ²åÈë²ÎÊı
+			ps = conn.prepareStatement(sql);  // é¢„ç¼–è¯‘ SQL è¯­å¥
+			ps.setString(1, user.getName());  // è®¾ç½® SQL æ’å…¥å‚æ•°
 			ps.setString(2, user.getPwd());
 			ps.setString(3, user.getTel());
 			ps.setString(4, user.getEmail());
 			ps.setString(5, user.getSex());
-			int rowsInserted = ps.executeUpdate();  // Ö´ĞĞ²åÈë²Ù×÷
-			return rowsInserted > 0;  // Èç¹û²åÈëĞĞÊı´óÓÚ 0£¬·µ»Ø true£¬·ñÔò·µ»Ø false
+			int rowsInserted = ps.executeUpdate();  // æ‰§è¡Œæ’å…¥æ“ä½œ
+			return rowsInserted > 0;  // å¦‚æœæ’å…¥è¡Œæ•°å¤§äº 0ï¼Œè¿”å› trueï¼Œå¦åˆ™è¿”å› false
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;  // ³öÏÖÒì³£Ê±£¬·µ»Ø false
+			return false;  // å‡ºç°å¼‚å¸¸æ—¶ï¼Œè¿”å› false
 		} finally {
-			DBUtil.closeDBResource(null, ps, conn);  // ¹Ø±ÕÊı¾İ¿â×ÊÔ´
+			DBUtil.closeDBResource(null, ps, conn);  // å…³é—­æ•°æ®åº“èµ„æº
 		}
 	}
 
 	public static boolean ChangeUser(Users user) {
-		Connection conn = DBUtil.getConn();  // »ñÈ¡Êı¾İ¿âÁ¬½Ó
+		Connection conn = DBUtil.getConn();  // è·å–æ•°æ®åº“è¿æ¥
 		String sql = "UPDATE users SET pwd=? WHERE name=?";
 		PreparedStatement ps = null;
 		try {
-			ps = conn.prepareStatement(sql);  // Ô¤±àÒë SQL Óï¾ä
+			ps = conn.prepareStatement(sql);  // é¢„ç¼–è¯‘ SQL è¯­å¥
 			ps.setString(1, user.getPwd());
 			ps.setString(2, user.getName());
-			int rowsChange = ps.executeUpdate();  // Ö´ĞĞ²åÈë²Ù×÷
-			return rowsChange > 0;  // Èç¹û²åÈëĞĞÊı´óÓÚ 0£¬·µ»Ø true£¬·ñÔò·µ»Ø false
+			int rowsChange = ps.executeUpdate();  // æ‰§è¡Œæ’å…¥æ“ä½œ
+			return rowsChange > 0;  // å¦‚æœæ’å…¥è¡Œæ•°å¤§äº 0ï¼Œè¿”å› trueï¼Œå¦åˆ™è¿”å› false
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;  // ³öÏÖÒì³£Ê±£¬·µ»Ø false
+			return false;  // å‡ºç°å¼‚å¸¸æ—¶ï¼Œè¿”å› false
 		} finally {
-			DBUtil.closeDBResource(null, ps, conn);  // ¹Ø±ÕÊı¾İ¿â×ÊÔ´
+			DBUtil.closeDBResource(null, ps, conn);  // å…³é—­æ•°æ®åº“èµ„æº
 		}
 	}
 
@@ -126,11 +126,11 @@ public class UserDao {
 				System.out.println(rs.getString("pwd"));
 				return rs.getString("pwd");
 			} else {
-				return null; // ÓÃ»§²»´æÔÚ
+				return null; // ç”¨æˆ·ä¸å­˜åœ¨
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null; // ³öÏÖÒì³£Ê±£¬·µ»Ønull
+			return null; // å‡ºç°å¼‚å¸¸æ—¶ï¼Œè¿”å›null
 		} finally {
 			DBUtil.closeDBResource(rs, ps, conn);
 		}

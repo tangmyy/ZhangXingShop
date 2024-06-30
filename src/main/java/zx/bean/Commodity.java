@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class Commodity {
-	private Integer id;		// Integer¿ÉÒÔÊÇ null int 0 ²»Çø·ÖÓÃÕûĞÎ
+	private Integer id;		// Integerå¯ä»¥æ˜¯ null int 0 ä¸åŒºåˆ†ç”¨æ•´å½¢
 	private String description;
 	private String imgpath;
 	private Integer sort;

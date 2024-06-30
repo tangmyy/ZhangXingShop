@@ -18,11 +18,11 @@ public class DBUtil {
 			connection = DriverManager.getConnection(DBUrl, DBUser, DBPwd);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
-			System.out.println("SQLServerDriverÃ»ÓĞÕÒµ½£¬Çı¶¯°ü¼ÓÔØÁËÂğ");
+			System.out.println("SQLServerDriveræ²¡æœ‰æ‰¾åˆ°ï¼Œé©±åŠ¨åŒ…åŠ è½½äº†å—");
 			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-//			System.out.println("Êı¾İ¿âÁ¬½Ó³öÏÖÁËÎÊÌâ");
+//			System.out.println("æ•°æ®åº“è¿æ¥å‡ºç°äº†é—®é¢˜");
 			e.printStackTrace();
 		}
 		return connection;
@@ -44,7 +44,7 @@ public class DBUtil {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			System.out.println("¹Ø±ÕÊı¾İ¿â³öÏÖÁËÎÊÌâ");
+			System.out.println("å…³é—­æ•°æ®åº“å‡ºç°äº†é—®é¢˜");
 			e.printStackTrace();
 		}
 
@@ -65,11 +65,11 @@ public class DBUtil {
 				String email=rs.getString(5);
 				String sex=rs.getString(6);
 
-				//È¡³öÊ±¼ä
+				//å–å‡ºæ—¶é—´
 				LocalDateTime createTimeValue = rs.getTimestamp("create_time").toLocalDateTime();
-				//ÉèÖÃÈÕÆÚÏÔÊ¾¸ñÊ½
+				//è®¾ç½®æ—¥æœŸæ˜¾ç¤ºæ ¼å¼
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYY-MM-DD HH:MM:SS");
-				//°ÑÈ¡³öµÄÊ±¼ä×ª»»³ÉĞèÒªµÄÊ±¼ä¸ñÊ½×Ö·û´®
+				//æŠŠå–å‡ºçš„æ—¶é—´è½¬æ¢æˆéœ€è¦çš„æ—¶é—´æ ¼å¼å­—ç¬¦ä¸²
 				String createTime = createTimeValue.format(formatter);
 
 				System.out.print(id+"\t");
@@ -80,7 +80,7 @@ public class DBUtil {
 				System.out.print(sex+"\t\n");
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();//²»ÒªÉ¾£¬³öÁËÎÊÌâĞèÒªÔÚ¿ØÖÆÌ¨ÕÒ³öÔ­Òò
+			e.printStackTrace();//ä¸è¦åˆ ï¼Œå‡ºäº†é—®é¢˜éœ€è¦åœ¨æ§åˆ¶å°æ‰¾å‡ºåŸå› 
 		}finally {
 			closeDBResource(rs, ps, conn);
 		}

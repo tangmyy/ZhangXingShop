@@ -6,7 +6,7 @@ function passwordCheck() {
     var rs_userpwd = document.getElementById("rs_userpwd").value;
     var rs_qruserpwd = document.getElementById("rs_qruserpwd").value;
     if (rs_userpwd !== rs_qruserpwd) {
-        alert("Çë¼ì²é£¡Á½´ÎÊäÈëµÄÃÜÂë²»Ò»ÖÂ!");
+        alert("è¯·æ£€æŸ¥ï¼ä¸¤æ¬¡è¾“å…¥çš„å¯†ç ä¸ä¸€è‡´!");
         return false;
     }
     return true;
@@ -16,7 +16,7 @@ function emailCheck() {
     var rs_email = document.getElementById("rs_email").value;
     var emailPattern = /^[A-Za-z0-9+_.-]+@(.+)$/;
     if (!emailPattern.test(rs_email)) {
-        alert("Çë¼ì²é£¡ÓÊÏä¸ñÊ½²»ÕıÈ·!");
+        alert("è¯·æ£€æŸ¥ï¼é‚®ç®±æ ¼å¼ä¸æ­£ç¡®!");
         return false;
     }
     return true;

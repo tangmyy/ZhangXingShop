@@ -12,12 +12,12 @@ import java.io.IOException;
 public class ShopCartController extends HttpServlet {
    @Override
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      // »ñÈ¡¿Í»§¶Ë´«µİÀ´µÄ²ÎÊı
+      // è·å–å®¢æˆ·ç«¯ä¼ é€’æ¥çš„å‚æ•°
       String commodityId = request.getParameter("commodityId");
       String serviceType = request.getParameter("serviceType");
       String changeNum = request.getParameter("changeNum");
-      String isChecked = request.getParameter("isChecked"); // ĞÂÔö
-      MyShopCartDate myShopCartDate = (MyShopCartDate) request.getSession().getAttribute("myShopCartDate");    // Ç¿ÖÆ×ª»»
+      String isChecked = request.getParameter("isChecked"); // æ–°å¢
+      MyShopCartDate myShopCartDate = (MyShopCartDate) request.getSession().getAttribute("myShopCartDate");    // å¼ºåˆ¶è½¬æ¢
 
 
       if(myShopCartDate == null) {
@@ -47,7 +47,7 @@ public class ShopCartController extends HttpServlet {
       }
 
       boolean cartEmpty = myShopCartDate.getCartList().isEmpty();
-      System.out.println(myShopCartDate);      //  !!!!!!***¿ØÖÆÌ¨Êä³öÓï¾ä***!!!!!!
+      System.out.println(myShopCartDate);      //  !!!!!!***æ§åˆ¶å°è¾“å‡ºè¯­å¥***!!!!!!
 
 
 //      response.sendRedirect("myshopcart.jsp");

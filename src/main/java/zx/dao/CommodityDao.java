@@ -23,7 +23,7 @@ import zx.util.DBUtil;
  */
 public class CommodityDao {
 
-   // ²éÑ¯ËùÓĞ ·ÖÀà±ğ select ForHomeBySort (homeData)
+   // æŸ¥è¯¢æ‰€æœ‰ åˆ†ç±»åˆ« select ForHomeBySort (homeData)
    public static void selectForHomeBySort(HomeData homeData){
       Connection conn = DBUtil.getConn();
       String sql = null;
@@ -38,7 +38,7 @@ public class CommodityDao {
       PreparedStatement ps = null;
       ResultSet rs = null;
       try {
-         ps = conn.prepareStatement(sqlCurPage);         // ²úÉúÊı¾İ¿âÓï¾äÖ´ĞĞµÄÔØÌå
+         ps = conn.prepareStatement(sqlCurPage);         // äº§ç”Ÿæ•°æ®åº“è¯­å¥æ‰§è¡Œçš„è½½ä½“
          if(homeData.getSort() == 0){
             ps.setInt( 1, (homeData.getCurPage()-1) *homeData.getNumPerPage()+1 );
             ps.setInt( 2, homeData.getCurPage() *homeData.getNumPerPage() );
@@ -47,10 +47,10 @@ public class CommodityDao {
             ps.setInt( 2, (homeData.getCurPage()-1) *homeData.getNumPerPage()+1 );
             ps.setInt( 3, homeData.getCurPage() *homeData.getNumPerPage() );
          }
-         rs = ps.executeQuery();	 // ÕæÕıÖ´ĞĞ²éÑ¯²Ù×÷
+         rs = ps.executeQuery();	 // çœŸæ­£æ‰§è¡ŒæŸ¥è¯¢æ“ä½œ
          ArrayList<Commodity> commodityList = new ArrayList<Commodity>();
          while(rs.next()){
-            int id = rs.getInt("id");	// ×Ö¶ÎÃûºÍÊı×ÖµÄÇø±ğ£¿
+            int id = rs.getInt("id");	// å­—æ®µåå’Œæ•°å­—çš„åŒºåˆ«ï¼Ÿ
             String description = rs.getString("description");
             String imgpath = rs.getString("imgpath");
             int sort = rs.getInt("sort");
@@ -65,14 +65,14 @@ public class CommodityDao {
          homeData.setCommodityList(commodityList);
          System.out.println(homeData);
       } catch (SQLException e) {
-         e.printStackTrace();	// ²»ÒªÉ¾£¬³öÁËÎÊÌâĞèÒªÔÚ¿ØÖÆÌ¨ÕÒ³öÔ­Òò
+         e.printStackTrace();	// ä¸è¦åˆ ï¼Œå‡ºäº†é—®é¢˜éœ€è¦åœ¨æ§åˆ¶å°æ‰¾å‡ºåŸå› 
       }finally {
          DBUtil.closeDBResource(rs, ps, conn);
       }
    }
 
 
-   // ¹Ø¼ü×Ö²éÑ¯ select For Home ByKeyword (homeData,  keyword)
+   // å…³é”®å­—æŸ¥è¯¢ select For Home ByKeyword (homeData,  keyword)
    public static void selectForHomeByKeyword(HomeData homeData, String keyword) {
       Connection conn = DBUtil.getConn();
       PreparedStatement ps = null;
@@ -83,14 +83,14 @@ public class CommodityDao {
       selectForHomeTotalElement(homeData, sql, keyword);
 
       try {
-         ps = conn.prepareStatement(sqlCurPage);       // ²úÉúÊı¾İ¿âÓï¾äÖ´ĞĞµÄÔØÌå
-                                                                     //  ÎªÊ²Ã´ÊÇ sort==0£¿£¿£¿£¿
+         ps = conn.prepareStatement(sqlCurPage);       // äº§ç”Ÿæ•°æ®åº“è¯­å¥æ‰§è¡Œçš„è½½ä½“
+                                                                     //  ä¸ºä»€ä¹ˆæ˜¯ sort==0ï¼Ÿï¼Ÿï¼Ÿï¼Ÿ
 
             ps.setString(1, "%" + keyword + "%");
             ps.setInt(2, (homeData.getCurPage() - 1) * homeData.getNumPerPage() + 1);
             ps.setInt(3, homeData.getCurPage() * homeData.getNumPerPage());
 
-         rs = ps.executeQuery();    // ÕæÕıÖ´ĞĞ²éÑ¯²Ù×÷
+         rs = ps.executeQuery();    // çœŸæ­£æ‰§è¡ŒæŸ¥è¯¢æ“ä½œ
          ArrayList<Commodity> commodityList = new ArrayList<>();
          while (rs.next()) {
             Integer id = rs.getInt(1);
@@ -116,17 +116,17 @@ public class CommodityDao {
    }
 
 
-   // Á©²ÎÊıselect For Home TotalElement
+   // ä¿©å‚æ•°select For Home TotalElement
    public static void selectForHomeTotalElement(HomeData homeData, String sql){
       Connection conn = DBUtil.getConn();
       PreparedStatement ps = null;
       ResultSet rs = null;
       try {
-         ps = conn.prepareStatement(sql);         // ²úÉúÊı¾İ¿âÓï¾äÖ´ĞĞµÄÔØÌå
-         if (homeData.getSort() != 0) {           // sort ²»Îª0 ·ÖÀà²éÑ¯
+         ps = conn.prepareStatement(sql);         // äº§ç”Ÿæ•°æ®åº“è¯­å¥æ‰§è¡Œçš„è½½ä½“
+         if (homeData.getSort() != 0) {           // sort ä¸ä¸º0 åˆ†ç±»æŸ¥è¯¢
             ps.setInt(1, homeData.getSort());
          }
-         rs=ps.executeQuery();	                  // ÕæÕıÖ´ĞĞ²éÑ¯²Ù×÷
+         rs=ps.executeQuery();	                  // çœŸæ­£æ‰§è¡ŒæŸ¥è¯¢æ“ä½œ
          int total = 0;
          while (rs.next()) {
             total++;
@@ -139,18 +139,18 @@ public class CommodityDao {
       }
    }
 
-   // Øí²ÎÊıselect For Home TotalElement
+   // ä»¨å‚æ•°select For Home TotalElement
    public static void selectForHomeTotalElement(HomeData homeData, String sql, String keyword) {
       Connection conn = DBUtil.getConn();
       PreparedStatement ps = null;
       ResultSet rs = null;
 
       try {
-         ps = conn.prepareStatement(sql);         // ²úÉúÊı¾İ¿âÓï¾äÖ´ĞĞµÄÔØÌå
-         if (homeData.getSort() != 0) {           // sort Îª0 ²»½øĞĞ·ÖÀà²éÑ¯
+         ps = conn.prepareStatement(sql);         // äº§ç”Ÿæ•°æ®åº“è¯­å¥æ‰§è¡Œçš„è½½ä½“
+         if (homeData.getSort() != 0) {           // sort ä¸º0 ä¸è¿›è¡Œåˆ†ç±»æŸ¥è¯¢
             ps.setString(1, "%" + keyword + "%");
          }
-         rs = ps.executeQuery();                 // ÕæÕıÖ´ĞĞ²éÑ¯²Ù×÷
+         rs = ps.executeQuery();                 // çœŸæ­£æ‰§è¡ŒæŸ¥è¯¢æ“ä½œ
          int total = 0;
          while (rs.next()) {
             total++;
@@ -164,24 +164,24 @@ public class CommodityDao {
 
    }
 
-   // select Commodity ById     // CommodityÀàĞÍµÄ·½·¨°¡!?
+   // select Commodity ById     // Commodityç±»å‹çš„æ–¹æ³•å•Š!?
    public static Commodity selectCommodityById(int CommodityId){
-      // ²úÉúÊı¾İ¿âµÄÁ¬½Ó
+      // äº§ç”Ÿæ•°æ®åº“çš„è¿æ¥
       Connection conn = DBUtil.getConn();
-      // ×¼±¸sqlÓï¾ä
+      // å‡†å¤‡sqlè¯­å¥
       String sql = "select * from commodity where id=?";
 
       PreparedStatement ps = null;
       ResultSet rs = null;
       Commodity commodity = null;
       try {
-         ps = conn.prepareStatement(sql);          // ²úÉúÊı¾İ¿âÓï¾äÖ´ĞĞµÄÔØÌå
+         ps = conn.prepareStatement(sql);          // äº§ç”Ÿæ•°æ®åº“è¯­å¥æ‰§è¡Œçš„è½½ä½“
          ps.setInt(1, CommodityId);
-         rs = ps.executeQuery();	                  // ÕæÕıÖ´ĞĞ²éÑ¯²Ù×÷
+         rs = ps.executeQuery();	                  // çœŸæ­£æ‰§è¡ŒæŸ¥è¯¢æ“ä½œ
 
          ArrayList<Commodity> commodityList = new ArrayList<Commodity>();
          while(rs.next()){
-            int id = rs.getInt("id");	// ×Ö¶ÎÃûºÍÊı×ÖµÄÇø±ğ£¿
+            int id = rs.getInt("id");	// å­—æ®µåå’Œæ•°å­—çš„åŒºåˆ«ï¼Ÿ
             String description = rs.getString("description");
             String imgpath = rs.getString("imgpath");
             int sort = rs.getInt("sort");
@@ -193,7 +193,7 @@ public class CommodityDao {
             commodity = new Commodity(id, description, imgpath, sort, price, quantity, createTime, creator);
          }
       } catch (SQLException e) {
-         e.printStackTrace();	// ²»ÒªÉ¾£¬³öÁËÎÊÌâĞèÒªÔÚ¿ØÖÆÌ¨ÕÒ³öÔ­Òò
+         e.printStackTrace();	// ä¸è¦åˆ ï¼Œå‡ºäº†é—®é¢˜éœ€è¦åœ¨æ§åˆ¶å°æ‰¾å‡ºåŸå› 
       }finally {
          DBUtil.closeDBResource(rs, ps, conn);
       }

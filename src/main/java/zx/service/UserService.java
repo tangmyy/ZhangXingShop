@@ -12,24 +12,24 @@ public class UserService {
 		new UserDao().selectForLogin(user);
 	}
 	public static boolean Register(Users user) {
-		// Ê×ÏÈ£¬¼ì²éÓÃ»§ÊÇ·ñÒÑ×¢²á
+		// é¦–å…ˆï¼Œæ£€æŸ¥ç”¨æˆ·æ˜¯å¦å·²æ³¨å†Œ
 		if (UserDao.selectForRegister(user)) {
-			System.out.println("ÓÃ»§ÒÑ×¢²á");
+			System.out.println("ç”¨æˆ·å·²æ³¨å†Œ");
 			return false;
 		} else {
-			System.out.println("Î´×¢²á£¬³¢ÊÔ²åÈëĞÂÓÃ»§");
+			System.out.println("æœªæ³¨å†Œï¼Œå°è¯•æ’å…¥æ–°ç”¨æˆ·");
 			return UserDao.InsertUser(user);
 		}
 	}
 	public static boolean Retrieve(Users user) {
-		// Ê×ÏÈ£¬¼ì²éÓÃ»§ÊÇ·ñ´æÔÚ
+		// é¦–å…ˆï¼Œæ£€æŸ¥ç”¨æˆ·æ˜¯å¦å­˜åœ¨
 		if (UserDao.selectForRegister(user)) {
-			// ÒÑ×¢²á£¬ĞŞ¸Ä
-			System.out.println("ÓÃ»§´æÔÚ£¬¿ÉÒÔĞŞ¸Ä");
-			return UserDao.ChangeUser(user);		// µ÷ÓÃĞŞ¸Äº¯Êı
+			// å·²æ³¨å†Œï¼Œä¿®æ”¹
+			System.out.println("ç”¨æˆ·å­˜åœ¨ï¼Œå¯ä»¥ä¿®æ”¹");
+			return UserDao.ChangeUser(user);		// è°ƒç”¨ä¿®æ”¹å‡½æ•°
 		} else {
-			// Î´×¢²á
-			System.out.println("ÓÃ»§²»´æÔÚ£¬ÎŞ·¨ĞŞ¸Ä");
+			// æœªæ³¨å†Œ
+			System.out.println("ç”¨æˆ·ä¸å­˜åœ¨ï¼Œæ— æ³•ä¿®æ”¹");
 			return false;
 		}
 	}

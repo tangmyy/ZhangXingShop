@@ -17,13 +17,13 @@ public class ShopCartService {
             updateByCheckedBox(commodityId, isChecked, myShopCartDate);
             break;
          case "updateAllCheckedBox":
-            boolean allChecked = Boolean.parseBoolean(isChecked); // ½« isChecked ½âÊÍÎªÈ«Ñ¡×´Ì¬
+            boolean allChecked = Boolean.parseBoolean(isChecked); // å°† isChecked è§£é‡Šä¸ºå…¨é€‰çŠ¶æ€
             updateAllCheckedBox(myShopCartDate, allChecked);
          break;
          case "remove":
             remove(commodityId, myShopCartDate);
             break;
-         default:             // Èç¹ûÃ»ÓĞÆ¥ÅäµÄcaseÔòÖ´ĞĞ£º
+         default:             // å¦‚æœæ²¡æœ‰åŒ¹é…çš„caseåˆ™æ‰§è¡Œï¼š
             break;
       }
    }
@@ -54,13 +54,13 @@ public class ShopCartService {
 
 
    public static void addToCart(String commodityId, MyShopCartDate myShopCartDate){
-      if(myShopCartDate.getCartList().containsKey(commodityId)){     // µ±Ç°¹ºÎï³µÓĞ´ËÉÌÆ· ¸üĞÂÊıÁ¿²¢Ñ¡ÖĞ
-         // ÏÈ°Ñµ±Ç°Ïî±£´æ£¬ĞèÒªÊ¹ÓÃÊı¾İ
+      if(myShopCartDate.getCartList().containsKey(commodityId)){     // å½“å‰è´­ç‰©è½¦æœ‰æ­¤å•†å“ æ›´æ–°æ•°é‡å¹¶é€‰ä¸­
+         // å…ˆæŠŠå½“å‰é¡¹ä¿å­˜ï¼Œéœ€è¦ä½¿ç”¨æ•°æ®
          MyShopCartItemData myShopCartItemData = myShopCartDate.getCartList().get(commodityId);
-         myShopCartDate.remove(commodityId);       // removeÄÚÒÑ¾­ÊµÏÖ¸üĞÂ×Ü¼Æ
+         myShopCartDate.remove(commodityId);       // removeå†…å·²ç»å®ç°æ›´æ–°æ€»è®¡
          myShopCartDate.add(myShopCartItemData.getCommodity(),myShopCartItemData.getNum()+1);
       }else{
-         // ÏÈ×¼±¸ Commodity ¶ÔÏó£¬Í¨¹ıcommodityDao²ã²éÑ¯Êı¾İÀ´µÃµ½Êı¾İ
+         // å…ˆå‡†å¤‡ Commodity å¯¹è±¡ï¼Œé€šè¿‡commodityDaoå±‚æŸ¥è¯¢æ•°æ®æ¥å¾—åˆ°æ•°æ®
          Commodity commodity = CommodityDao.selectCommodityById(Integer.parseInt(commodityId));
          myShopCartDate.add(commodity, 1);
       }

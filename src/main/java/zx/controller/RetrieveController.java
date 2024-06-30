@@ -17,7 +17,7 @@ import java.io.IOException;
 public class RetrieveController extends HttpServlet {
    @Override
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      // 1»ñÈ¡¿Í»§¶ËÊı¾İ
+      // 1è·å–å®¢æˆ·ç«¯æ•°æ®
       String Ret_username = request.getParameter("Ret_username");
       String Ret_userpwd = request.getParameter("Ret_userpwd");
       String Ret_qruserpwd = request.getParameter("Ret_qruserpwd");
@@ -27,27 +27,27 @@ public class RetrieveController extends HttpServlet {
       System.out.println("Ret_userpwd = " + Ret_userpwd);
       System.out.println("Ret_qruserpwd = " + Ret_qruserpwd);
 
-      // ¼ì²éÁ½´ÎÊäÈëµÄÃÜÂëÊÇ·ñÏàÍ¬
+      // æ£€æŸ¥ä¸¤æ¬¡è¾“å…¥çš„å¯†ç æ˜¯å¦ç›¸åŒ
       if(!Ret_userpwd.equals(Ret_qruserpwd)){
-         request.setAttribute("passwordCheck", "Á½´ÎÊäÈëÃÜÂë²»Ò»ÖÂ£¡");
+         request.setAttribute("passwordCheck", "ä¸¤æ¬¡è¾“å…¥å¯†ç ä¸ä¸€è‡´ï¼");
          request.getRequestDispatcher("retrieve.jsp").forward(request, response);
          return;
       }
 
-      // 2·â×°Êı¾İ,µ÷ÓÃÒµÎñÂß¼­²ãÀ´´¦ÀíÊı¾İ
+      // 2å°è£…æ•°æ®,è°ƒç”¨ä¸šåŠ¡é€»è¾‘å±‚æ¥å¤„ç†æ•°æ®
       Users user = new Users();
       user.setName(Ret_username);
       String pwdmd5 = MD5Util.getMD5Str(Ret_userpwd);
       user.setPwd(pwdmd5);
 
-      // 3¸ù¾İÒµÎñÂß¼­²ãµÄ·µ»Ø½á¹û×ö³ö²»Í¬µÄÏìÓ¦
+      // 3æ ¹æ®ä¸šåŠ¡é€»è¾‘å±‚çš„è¿”å›ç»“æœåšå‡ºä¸åŒçš„å“åº”
       response.setContentType("text/html;charset=utf-8");
 
       if(UserService.Retrieve(user)){
-         response.getWriter().write("ĞŞ¸Ä³É¹¦£¡ 5sºóÌø×ªµ½µÇÂ¼Ò³Ãæ...");
+         response.getWriter().write("ä¿®æ”¹æˆåŠŸï¼ 5såè·³è½¬åˆ°ç™»å½•é¡µé¢...");
          response.setHeader("refresh", "5;login.jsp");
       } else {
-         response.getWriter().write("¸ÃÓÃ»§²»´æÔÚ£¬Çë×¢²á£¡ 5sºóÌø×ªµ½×¢²áÒ³Ãæ...");
+         response.getWriter().write("è¯¥ç”¨æˆ·ä¸å­˜åœ¨ï¼Œè¯·æ³¨å†Œï¼ 5såè·³è½¬åˆ°æ³¨å†Œé¡µé¢...");
          response.setHeader("refresh", "5;register.jsp");
       }
 

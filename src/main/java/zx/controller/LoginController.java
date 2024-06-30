@@ -27,21 +27,21 @@ public class LoginController extends HttpServlet {
 		String logout = request.getParameter("logout");
 		if (logout != null){
 			HttpSession session = request.getSession();
-				session.invalidate();	// Ö÷¶¯Ïú»Ù»á»°
+				session.invalidate();	// ä¸»åŠ¨é”€æ¯ä¼šè¯
 			response.sendRedirect("HomeController");
 			return;
 		}
-		// »ñÈ¡¿Í»§¶ËÊı¾İ
+		// è·å–å®¢æˆ·ç«¯æ•°æ®
 		String name = request.getParameter("username");
 		String pwd = request.getParameter("userpwd");
 
-		// 2·â×°Êı¾İ,µ÷ÓÃÒµÎñÂß¼­²ãÀ´´¦ÀíÊı¾İ
+		// 2å°è£…æ•°æ®,è°ƒç”¨ä¸šåŠ¡é€»è¾‘å±‚æ¥å¤„ç†æ•°æ®
 	  	 Users user = new Users();
 	  	 user.setName(name);
 	  	 user.setPwd(pwd);
 
 
-		// ¡¾¿ØÖÆÌ¨ÌáÊ¾¡¿	System.out.println("LoginController Class doGet:"+user.toString());
+		// ã€æ§åˆ¶å°æç¤ºã€‘	System.out.println("LoginController Class doGet:"+user.toString());
 		System.out.println("name = "+name);
 		System.out.println("pwd = "+pwd);
 		System.out.println("LoginController "+ user);
@@ -49,18 +49,18 @@ public class LoginController extends HttpServlet {
 
 	  	 UserService userService = new UserService();
 	  	 userService.Login(user); 
-	  	 // ¸ù¾İÒµÎñÂß¼­²ãµÄ·µ»Ø½á¹û×ö³ö²»Í¬µÄÏìÓ¦
+	  	 // æ ¹æ®ä¸šåŠ¡é€»è¾‘å±‚çš„è¿”å›ç»“æœåšå‡ºä¸åŒçš„å“åº”
 	  	 response.setContentType("text/html;charset=utf-8");
 	  	 if(user.getId() == null){
-			response.getWriter().write("ÄúµÄÓÃ»§Ãû»òÕßÃÜÂë´íÎó£¬ÇëÖØĞÂÊäÈë£º");
+			response.getWriter().write("æ‚¨çš„ç”¨æˆ·åæˆ–è€…å¯†ç é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥ï¼š");
 			response.setHeader("refresh", "5;login.jsp");
 	  	 }else if(user.getId() == -1) {
-			response.getWriter().write("ÏµÍ³±ÀÀ££¬ÇëÉÔºóÔÙÊÔ£¡");
+			response.getWriter().write("ç³»ç»Ÿå´©æºƒï¼Œè¯·ç¨åå†è¯•ï¼");
 			response.setHeader("refresh", "5;login.jsp");
 	  	 }else {
 			 HttpSession session = request.getSession();
 			 session.setAttribute("user", user);
-			 MyShopCartDate myShopCartDate = new MyShopCartDate(user.getId());		// ¹ºÎï³µ³õÊ¼»¯
+			 MyShopCartDate myShopCartDate = new MyShopCartDate(user.getId());		// è´­ç‰©è½¦åˆå§‹åŒ–
 			 session.setAttribute("myShopCartDate", myShopCartDate);
 			 response.sendRedirect("HomeController");
 	  	 }

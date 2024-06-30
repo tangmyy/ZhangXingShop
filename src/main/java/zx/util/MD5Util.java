@@ -15,14 +15,14 @@ public class MD5Util {
 	        } catch (UnsupportedEncodingException e) {
 	            e.printStackTrace();
 	        }
-	        //16ÊÇ±íÊ¾×ª»»Îª16½øÖÆÊı
+	        //16æ˜¯è¡¨ç¤ºè½¬æ¢ä¸º16è¿›åˆ¶æ•°
 	        String md5Str = new BigInteger(1, digest).toString(16);
 	        return md5Str;
 	    }
 
 
 	 public static void main(String[] args) {
-		 String md5 = MD5Util.getMD5Str("JavaEE");//JavaEEÎªÃÜÂë£ºmd5¼ÓÃÜºóµÄÊı¾İ£ºa1212a200973d24c465cfde2c3e6b5ed
+		 String md5 = MD5Util.getMD5Str("JavaEE");//JavaEEä¸ºå¯†ç ï¼šmd5åŠ å¯†åçš„æ•°æ®ï¼ša1212a200973d24c465cfde2c3e6b5ed
 		 System.out.println("MD5Util JavaEE = " + md5);
 	}
 
